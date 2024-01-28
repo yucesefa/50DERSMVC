@@ -1,0 +1,27 @@
+﻿@model List<MVCStok.Models.tblKategoriler>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<table class="table table-hover">
+    <tr>
+        <th>Kategori ID</th>
+        <th>Kategori Adı</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.KategoriID</td>
+            <td>@item.KategoriAd</td>
+            <td><a href="/Kategori/KategoriSil" class="btn btn-danger">Sil</a></td>
+            <td><a href="/Kategori/KategoriGuncelle" class="btn btn-primary">Güncelle</a></td>
+        </tr>
+
+    }
+</table>
+<a href="/Kategori/YeniKategori" class="btn btn-success">Yeni Kategori Ekle</a>
