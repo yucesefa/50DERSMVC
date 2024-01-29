@@ -1,10 +1,20 @@
-﻿@model List<MVCStok.Models.tblMusteriler>
+﻿@using MVCStok.Models
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<tblMusteriler>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>Index</h2>
+@using (Html.BeginForm("Index", "Musteri", FormMethod.Get))
+{
+    <p>
+        <b>Aranacak Müşteri Adı:</b> @Html.TextBox("p")
+        <input type="submit" value="Ara" />
+    
+    </p>
+}
 
 <table class="table table-hover">
     <tr>
@@ -13,6 +23,7 @@
         <th>Müşteri Soyadı</th>
         <th>Sil</th>
         <th>Güncelle</th>
+        <th>Alert</th>
     </tr>
     @foreach (var item in Model)
     {
@@ -20,10 +31,12 @@
             <td>@item.MusteriID</td>
             <td>@item.MusteriAd</td>
             <td>@item.MusteriSoyad</td>
-            <td><a href="#" class="btn btn-danger">Sil</a></td>
-            <td><a href="#" class="btn btn-primary">Güncelle</a></td>
+            <td><a href="/Musteri/MusteriSil/" class="btn btn-danger">Sil</a></td>
+            <td><a href="/Musteri/MusteriGuncelle/" class="btn btn-primary">Güncelle</a></td>
+            <td>@Html.ActionLink("Sil", "MusteriSil", new { id = item.MusteriID }, new { @class = "btn btn-warning", onclick = "return confirm('Gerçekten Silmek İstiyor musunuz?')" })</td>
         </tr>
 
     }
 </table>
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
 <a href="/Musteri/YeniMusteri/" class="btn btn-primary">Yeni Müşteri</a>

@@ -1,36 +1,45 @@
-﻿@model List<MVCStok.Models.tblUrunler>
+﻿@using MVCStok.Models
+@model List<tblUrunler>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>Index</h2>
 
-<table class="table table-hover">
-    <tr>
-        <th>Ürün ID</th>
-        <th>Ürün Adı</th>
-        <th>Marka</th>
-        <th>Ürün Kategori</th>
-        <th>Fiyat</th>
-        <th>Stok</th>
-        <th>Sil</th>
-        <th>Güncelle</th>
-    </tr>
-    @foreach (var item in Model)
-    {
+<table id="tblurun" class="table table-hover">
+    <thead>
         <tr>
-            <td>@item.UrunID</td>
-            <td>@item.UrunAd</td>
-            <td>@item.Marka</td>
-            <td>@item.tblKategoriler.KategoriAd</td>
-            <td>@item.Fiyat</td>
-            <td>@item.Stok</td>
-            <td><a href="/Urun/UrunSil" class="btn btn-danger">Sil</a></td>
-            <td><a href="/Urun/UrunGuncelle" class="btn btn-primary">Güncelle</a></td>
+            <th>Ürün ID</th>
+            <th>Ürün Adı</th>
+            <th>Marka</th>
+            <th>Ürün Kategori</th>
+            <th>Fiyat</th>
+            <th>Stok</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
         </tr>
-        
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.UrunID</td>
+                <td>@item.UrunAd</td>
+                <td>@item.Marka</td>
+                <td>@item.tblKategoriler.KategoriAd</td>
+                <td>@item.Fiyat</td>
+                <td>@item.Stok</td>
+                <td><a href="/Urun/UrunSil" class="btn btn-danger">Sil</a></td>
+                <td><a href="/Urun/UrunGetir" class="btn btn-primary">Güncelle</a></td>
+            </tr>
+        }
+    </tbody>
 </table>
 <br />
 <a href="/Urun/YeniUrun/" class="btn btn-primary">Yeni Ürün Ekle</a>
+<script type="text/javascript"src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<link href="~/Content/DataTables/css/dataTables.bootstrap4.css" rel="stylesheet" />
+
+<script>
+    $('#tblurun').DataTable();
+</script>

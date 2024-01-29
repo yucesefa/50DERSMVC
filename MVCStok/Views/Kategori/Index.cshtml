@@ -1,4 +1,7 @@
-﻿@model List<MVCStok.Models.tblKategoriler>
+﻿@using MVCStok.Models
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<tblKategoriler>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
@@ -12,6 +15,7 @@
         <th>Kategori Adı</th>
         <th>Sil</th>
         <th>Güncelle</th>
+        <th>Alert</th>
     </tr>
     @foreach (var item in Model)
     {
@@ -20,8 +24,10 @@
             <td>@item.KategoriAd</td>
             <td><a href="/Kategori/KategoriSil" class="btn btn-danger">Sil</a></td>
             <td><a href="/Kategori/KategoriGuncelle" class="btn btn-primary">Güncelle</a></td>
+            <td>@Html.ActionLink("Sil","KategoriSil",new {id=item.KategoriID},new {@class="btn btn-warning",onclick="return confirm('Gerçekten Silmek İstiyor musunuz?')"})</td>
         </tr>
 
     }
 </table>
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }));
 <a href="/Kategori/YeniKategori" class="btn btn-success">Yeni Kategori Ekle</a>

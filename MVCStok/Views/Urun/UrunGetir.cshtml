@@ -1,0 +1,32 @@
+﻿@model MVCStok.Models.tblUrunler
+@{
+    ViewBag.Title = "UrunGetir";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>UrunGetir</h2>
+@using (Html.BeginForm("MusteriGuncelle", "Musteri", FormMethod.Post))
+{
+    <div class="form-group">
+
+        @Html.HiddenFor(x => x.UrunID)
+        @Html.LabelFor(x => x.UrunAd)
+        @Html.TextBoxFor(x => x.UrunAd, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(x => x.Marka)
+        @Html.TextBoxFor(x => x.Marka, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(x => x.UrunKategori)
+        @Html.DropDownListFor(x=>x.tblKategoriler.KategoriID,(List<SelectListItem>)ViewBag.vl,new {@class = "form-control"}) 
+        @*@Html.TextBoxFor(x => x.UrunKategori, new { @class = "form-control" })*@
+        <br />
+        @Html.LabelFor(x => x.Fiyat)
+        @Html.TextBoxFor(x => x.Fiyat, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(x => x.Stok)
+        @Html.TextBoxFor(x => x.Stok, new { @class = "form-control" })
+    </div>
+    <div>
+        <button class="btn btn-info">Güncelle</button>
+    </div>
+}
